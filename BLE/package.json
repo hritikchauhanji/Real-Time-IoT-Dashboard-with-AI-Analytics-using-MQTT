@@ -1,0 +1,15 @@
+{
+  "name": "real-time-iot-dashboard-with-ai-analytics-using-mqtt",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node scan.js"
+  },
+  "author": "Hritik Chauhan",
+  "license": "ISC",
+  "dependencies": {
+    "@abandonware/noble": "^1.9.2-26"
+  }
+}

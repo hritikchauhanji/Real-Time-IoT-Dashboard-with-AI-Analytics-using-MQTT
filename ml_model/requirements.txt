@@ -1,0 +1,14 @@
+numpy
+pandas
+scikit-learn
+tensorflow
+fastapi
+uvicorn
+pydantic
+joblib
+python-dotenv
+matplotlib
+seaborn
+python-dotenv
+pymongo
+dnspython
