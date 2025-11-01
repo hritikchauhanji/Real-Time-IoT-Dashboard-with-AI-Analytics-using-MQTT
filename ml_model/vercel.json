@@ -1,4 +1,5 @@
 {
+    "version": 2,
   "builds": [
     { "src": "prediction_api.py", "use": "@vercel/python" }
   ],
