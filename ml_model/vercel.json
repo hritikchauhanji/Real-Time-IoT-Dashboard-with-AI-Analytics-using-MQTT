@@ -1,0 +1,8 @@
+{
+  "builds": [
+    { "src": "prediction_api.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "prediction_api.py" }
+  ]
+}
