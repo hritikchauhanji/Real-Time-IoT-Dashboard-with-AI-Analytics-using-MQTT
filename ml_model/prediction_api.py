@@ -296,13 +296,13 @@ def health_check():
         "timestamp": datetime.now().isoformat()
     }
 
-if __name__ == "__main__":
-    import uvicorn
-    print("\n" + "=" * 70)
-    print("🚀 Starting ML Prediction API Server")
-    print("=" * 70)
-    print("📊 API Documentation: http://localhost:8000/docs")
-    print("🏥 Health Check: http://localhost:8000/health")
-    print("=" * 70 + "\n")
+# if __name__ == "__main__":
+    # import uvicorn
+    # print("\n" + "=" * 70)
+    # print("🚀 Starting ML Prediction API Server")
+    # print("=" * 70)
+    # print("📊 API Documentation: http://localhost:8000/docs")
+    # print("🏥 Health Check: http://localhost:8000/health")
+    # print("=" * 70 + "\n")
     
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # uvicorn.run(app, host="0.0.0.0", port=8000)
