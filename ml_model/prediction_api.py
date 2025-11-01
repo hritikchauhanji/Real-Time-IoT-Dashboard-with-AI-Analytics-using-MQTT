@@ -87,12 +87,6 @@ def root():
     return {
         "message": "IoT ML Prediction API",
         "version": "1.0.0",
-        "endpoints": {
-            "predict": "/predict",
-            "predict_next_hour": "/predict/next-hour/{device_id}",
-            "detect_anomaly": "/anomaly/detect",
-            "get_anomalies": "/anomaly/history"
-        }
     }
 
 @app.post("/predict", response_model=PredictionResponse)
