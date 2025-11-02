@@ -59,6 +59,16 @@ def on_disconnect(client, userdata, rc):
 
 # Create MQTT Client
 client = mqtt.Client(client_id="IoT_Simulator_Publisher")
+
+# Enable TLS encryption for HiveMQ Cloud
+client.tls_set()  # Uses default trusted CA certificates
+
+# Set username and password (HiveMQ Cloud requires this)
+MQTT_USERNAME = os.getenv('MQTT_USERNAME')
+MQTT_PASSWORD = os.getenv('MQTT_PASSWORD')
+if MQTT_USERNAME and MQTT_PASSWORD:
+    client.username_pw_set(MQTT_USERNAME, MQTT_PASSWORD)
+
 client.on_connect = on_connect
 client.on_publish = on_publish
 client.on_disconnect = on_disconnect
