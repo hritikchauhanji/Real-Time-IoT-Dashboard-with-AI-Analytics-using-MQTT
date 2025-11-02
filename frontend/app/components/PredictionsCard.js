@@ -37,7 +37,9 @@ export default function PredictionsCard() {
           >
             <p className="font-semibold text-gray-800">{pred.device_id}</p>
             <div className="flex items-center gap-4 text-sm">
-              <span>Current: {pred.current_temp}°C</span>
+              <span className="text-gray-600">
+                Current: {pred.current_temp}°C
+              </span>
               <span>→</span>
               <span className="font-bold text-blue-600">
                 Predicted: {pred.predicted_temp}°C
