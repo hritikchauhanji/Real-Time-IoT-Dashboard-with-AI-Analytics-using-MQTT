@@ -14,7 +14,10 @@ class MQTTService {
       clientId: process.env.MQTT_CLIENT_ID || "backend_subscriber",
       clean: true,
       connectTimeout: 4000,
-      reconnectPeriod: 1000,
+      reconnectPeriod: 2000,
+      username: process.env.MQTT_USERNAME,
+      password: process.env.MQTT_PASSWORD,
+      protocol: "mqtts",
     };
 
     console.log(`\nConnecting to MQTT Broker: ${process.env.MQTT_BROKER}`);
