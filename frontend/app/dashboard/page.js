@@ -8,6 +8,7 @@ import TemperatureChart from "../components/TemperatureChart";
 import HumidityChart from "../components/HumidityChart";
 import AlertsSection from "../components/AlertsSection";
 import PredictionsCard from "../components/PredictionsCard";
+import AIChatbot from "../components/AIChatbot";
 
 export default function Dashboard() {
   const { isConnected, latestData, alerts } = useSocket();
@@ -119,6 +120,9 @@ export default function Dashboard() {
 
       {/* Alerts */}
       <AlertsSection alerts={alerts} />
+
+      {/* AI Chatbot - Add at the end */}
+      <AIChatbot />
     </div>
   );
 }
