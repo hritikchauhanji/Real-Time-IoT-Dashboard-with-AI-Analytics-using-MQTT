@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { SensorData } from "../models/SensorData.js";
 import axios from "axios";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const router = Router();
 
@@ -180,7 +183,7 @@ router.get("/ml/predict/:deviceId", async (req, res) => {
     const { deviceId } = req.params;
 
     const response = await axios.get(
-      `http://localhost:8000/predict/next-hour/${deviceId}`
+      `${process.env.ML_MODEL_URL}/predict/next-hour/${deviceId}`
     );
 
     res.json({
@@ -198,7 +201,9 @@ router.get("/ml/predict/:deviceId", async (req, res) => {
 // Get all predictions
 router.get("/ml/predictions", async (req, res) => {
   try {
-    const response = await axios.get("http://localhost:8000/stats/predictions");
+    const response = await axios.get(
+      `${process.env.ML_MODEL_URL}/stats/predictions`
+    );
 
     res.json(response.data);
   } catch (error) {

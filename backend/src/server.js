@@ -58,6 +58,12 @@ app.get("/health", (_, res) => {
   });
 });
 
+const isProd = process.env.NODE_ENV === "production";
+const wsProtocol = isProd ? "wss" : "ws";
+const wsHost =
+  process.env.BACKEND_WS_URL?.replace(/^https?/, wsProtocol) ||
+  `${wsProtocol}://localhost:${process.env.PORT || 5000}`;
+
 // Root endpoint
 app.get("/", (_, res) => {
   res.json({
@@ -66,20 +72,20 @@ app.get("/", (_, res) => {
     endpoints: {
       health: "/health",
       api: "/api",
-      websocket: "ws://localhost:" + (process.env.PORT || 5000),
+      websocket: wsHost,
     },
   });
 });
 
 // WebSocket connection handling
 io.on("connection", (socket) => {
-  console.log(`✓ Client connected to WebSocket: ${socket.id}`);
+  console.log(`Client connected to WebSocket: ${socket.id}`);
 
   // Send current MQTT status to new client
   socket.emit("mqtt-status", mqttService.getStatus());
 
   socket.on("disconnect", () => {
-    console.log(`✗ Client disconnected: ${socket.id}`);
+    console.log(`Client disconnected: ${socket.id}`);
   });
 
   // Handle client requests
