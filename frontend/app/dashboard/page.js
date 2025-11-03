@@ -16,6 +16,12 @@ export default function Dashboard() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Detect environment
+  const isProduction =
+    typeof window !== "undefined" &&
+    window.location.hostname !== "localhost" &&
+    window.location.hostname !== "127.0.0.1";
+
   // Fetch historical data on mount
   useEffect(() => {
     const fetchData = async () => {
@@ -59,6 +65,9 @@ export default function Dashboard() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading dashboard...</p>
+          <p className="text-xs text-gray-500 mt-2">
+            {isProduction ? "Production Mode" : "Development Mode"}
+          </p>
         </div>
       </div>
     );
@@ -68,12 +77,30 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50 p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
-          🏭 IoT Dashboard
-        </h1>
-        <p className="text-gray-600">
-          Real-time sensor monitoring with AI analytics
-        </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              🏭 IoT Dashboard
+            </h1>
+            <p className="text-gray-600">
+              Real-time sensor monitoring with AI analytics
+            </p>
+          </div>
+          {/* Environment Badge */}
+          <div className="hidden md:block">
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-medium ${
+                isProduction
+                  ? "bg-blue-100 text-blue-700"
+                  : "bg-green-100 text-green-700"
+              }`}
+            >
+              {isProduction
+                ? "🌐 Production (Polling)"
+                : "⚡ Development (WebSocket)"}
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Statistics Cards */}
@@ -121,7 +148,7 @@ export default function Dashboard() {
       {/* Alerts */}
       <AlertsSection alerts={alerts} />
 
-      {/* AI Chatbot - Add at the end */}
+      {/* AI Chatbot */}
       <AIChatbot />
     </div>
   );

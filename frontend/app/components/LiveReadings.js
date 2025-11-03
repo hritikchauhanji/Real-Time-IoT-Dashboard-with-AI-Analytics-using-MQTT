@@ -3,6 +3,12 @@
 import DeviceCard from "./DeviceCard";
 
 export default function LiveReadings({ data, isConnected }) {
+  // Detect if we're in production (Vercel) or development (localhost)
+  const isProduction =
+    typeof window !== "undefined" &&
+    window.location.hostname !== "localhost" &&
+    window.location.hostname !== "127.0.0.1";
+
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-6">
@@ -16,7 +22,11 @@ export default function LiveReadings({ data, isConnected }) {
             }`}
           />
           <span className="text-sm text-gray-600">
-            {isConnected ? "Connected" : "Disconnected"}
+            {isConnected
+              ? isProduction
+                ? "Connected (Polling)"
+                : "Connected (WebSocket)"
+              : "Disconnected"}
           </span>
         </div>
       </div>
@@ -24,8 +34,14 @@ export default function LiveReadings({ data, isConnected }) {
       {data.length === 0 ? (
         <div className="bg-gray-50 p-12 rounded-lg text-center">
           <p className="text-gray-500">
-            Waiting for sensor data... Make sure your MQTT publisher is running.
+            Waiting for sensor data... Make sure your backend is running.
           </p>
+          {!isConnected && (
+            <p className="text-red-500 text-sm mt-2">
+              ⚠️ Backend connection failed. Check your backend URL and ensure
+              it's running.
+            </p>
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
