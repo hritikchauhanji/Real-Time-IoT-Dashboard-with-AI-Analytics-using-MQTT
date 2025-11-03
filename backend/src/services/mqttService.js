@@ -17,7 +17,8 @@ class MQTTService {
       reconnectPeriod: 1000,
       username: process.env.MQTT_USERNAME,
       password: process.env.MQTT_PASSWORD,
-      protocol: "mqtt",
+      protocol: "mqtts",
+      rejectUnauthorized: false,
     };
 
     console.log(`\nConnecting to MQTT Broker: ${process.env.MQTT_BROKER}`);

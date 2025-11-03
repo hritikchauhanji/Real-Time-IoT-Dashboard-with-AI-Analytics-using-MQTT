@@ -10,9 +10,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuration
-BROKER = os.getenv('MQTT_BROKER', 'localhost')
-PORT = int(os.getenv('MQTT_PORT', 1883))
-TOPIC = os.getenv('MQTT_TOPIC', 'iot/sensors/data')
+BROKER = os.getenv('MQTT_BROKER')
+PORT = int(os.getenv('MQTT_PORT'))
+TOPIC = os.getenv('MQTT_TOPIC')
 
 # Sensor configuration
 DEVICES = [
